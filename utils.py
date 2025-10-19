@@ -58,7 +58,10 @@ def detrazioni_irpef_lavoro_dipendente(imponibile: float) -> float:
         return 1910.0 * (SOGLIE_DET_LAV_DIP[2] - imponibile) / (SOGLIE_DET_LAV_DIP[2] - SOGLIE_DET_LAV_DIP[1])
 
 
-def versato_nel_fondo(ral: float, quota_lavoratore: float, soglia_lavoratore: float = SOGLIA_FONDO_LAVORATORE, quota_datore: float = QUOTA_FONDO_DATORE) -> float:
+def versato_nel_fondo(ral: float,
+                      quota_lavoratore: float,
+                      soglia_lavoratore: float = SOGLIA_FONDO_LAVORATORE,
+                      quota_datore: float = QUOTA_FONDO_DATORE) -> float:
     if quota_lavoratore / ral < soglia_lavoratore:
         return quota_lavoratore
     else:
