@@ -102,6 +102,28 @@ def calcola_netto_annuo(ral: float,
     netto = ral - calcola_contributi(ral) - versamenti_fondo - totale_irpef
     return netto
 
+
+def simula(ral: float, versamento_lavoratore: float):
+    contributi = calcola_contributi(ral)
+    versato_nel_fondo_ = versato_nel_fondo(ral, versamento_lavoratore)
+    quota_fondo_azienda = versato_nel_fondo_ - versamento_lavoratore
+    imponibile = calcola_imponibile(ral, versamento_lavoratore)
+    irpef_netta = calcola_irpef_netta(imponibile)
+    addizionale_comunale = calcola_addizionale_comunale(imponibile)
+    addizionale_regionale = calcola_addizionale_regionale(imponibile)
+    netto_annuo = calcola_netto_annuo(ral, versamento_lavoratore)
+    return {
+        'contributi': contributi,
+        'versamento_lavoratore': versamento_lavoratore,
+        'versato_nel_fondo': versato_nel_fondo_,
+        'quota_fondo_azienda': quota_fondo_azienda,
+        'imponibile': imponibile,
+        'irpef_netta': irpef_netta,
+        'addizionale_regionale': addizionale_regionale,
+        'addizionale_comunale': addizionale_comunale,
+        'netto_annuo': netto_annuo
+    }
+
 if __name__ == '__main__':
     print(calcola_netto_annuo(25000, 4500))
     print(calcola_netto_annuo(25000, 5000))
